@@ -11,32 +11,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.Driver;
 
+import java.util.List;
+
 public class WikiPage {
 
-    WebDriver driver;
-
-    @Before
-    public void setup() {
-        driver = Driver.getDriver();
+    public WikiPage(){
+        PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    @Given("user navigates to {string}")
-    public void userNavigatesTo(String url) {
-        driver.get(url);
-    }
+    @FindBy(id = "searchInput")
+    public WebElement searchBar;
 
-    @Then("user should see {string} in the url")
-    public void userShouldSeeInTheUrl(String key) {
-//        String newKey = driver.getCurrentUrl().replaceAll("_", " ");
-//        Assert.assertTrue(newKey.contains(key));
+    @FindBy(id = "firstHeading")
+    public WebElement header;
 
-        for (String word : key.split(" ")) {
-            Assert.assertTrue(driver.getCurrentUrl().contains(word));
-        }
-    }
+    @FindBy(css = "a.link-box > strong")
+    public List<WebElement> mainLanguages;
 
-    @And("user should see {string} in the title")
-    public void userShouldSeeInTheTitle(String key) {
-        Assert.assertTrue(driver.getTitle().contains(key));
-    }
 }

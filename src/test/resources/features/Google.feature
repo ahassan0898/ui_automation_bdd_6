@@ -1,8 +1,15 @@
-Feature: Validate Google search functionality
+Feature: Google search functionality
 
-  Scenario: Validate the title and URL after search
-
+  @Google
+  Scenario Outline: Validate the title and url after search
     Given user navigates to "https://www.google.com"
-    When user search for "Tesla"
-    Then user should see "Tesla" in the url
-    And user should see "Tesla" in the title
+    When user search for "<input>"
+    Then user should see "<input>" in the url
+    And user should see "<input>" in the title
+
+    Examples:
+      | input     |
+      | Tesla     |
+#      | Apple     |
+#      | Microsoft |
+#      | Amazon    |
